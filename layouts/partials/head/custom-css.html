@@ -1,0 +1,11 @@
+{{/* custom-css.html — local override.
+     Loads site param custom_css list (static URLs) AND
+     pipes assets/css/netizen.css through Hugo for fingerprinting. */}}
+
+{{ range .Site.Params.custom_css }}
+  <link rel="stylesheet" href="{{ . | absURL }}">
+{{ end }}
+
+{{ $opts := dict "targetPath" "css/netizen.css" }}
+{{ $css := resources.Get "css/netizen.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">

@@ -1,0 +1,85 @@
+th:
+  label: "ไทย"
+  locale: "th-TH"
+  contentDir: content/th
+  weight: 1
+  title: "เครือข่ายพลเมืองเน็ต"
+  copyright: "เนื้อหาเผยแพร่ภายใต้สัญญาอนุญาต [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.th) โดย [เครือข่ายพลเมืองเน็ต](https://netizen.or.th/)"
+  params:
+    description: "องค์กรพลเมืองที่ทำงานด้านสิทธิมนุษยชนบนโลกออนไลน์ เสรีภาพในการแสดงออก ความเป็นส่วนตัว และอินเทอร์เน็ตเสรีในประเทศไทย"
+    accessibility:
+      skip_text: "ข้ามไปยังเนื้อหา"
+      help_text: "คำชี้แจงด้านการเข้าถึง"
+      help_url: "/accessibility/"
+    main_cta:
+      text: "ร่วมสนับสนุน"
+      link: "/support/"
+    footer_cta:
+      text: "ร่วมสนับสนุน"
+      link: "/support/"
+    github_edit: "แก้ไขหน้านี้บน GitHub"
+  menu:
+    main:
+      - identifier: "about"
+        name: "เกี่ยวกับเรา"
+        url: "/about/"
+        weight: 1
+      - identifier: "statements"
+        name: "แถลงการณ์"
+        url: "/statements/"
+        weight: 2
+      - identifier: "docs"
+        name: "เอกสาร"
+        url: "/docs/"
+        weight: 3
+      - identifier: "currents"
+        name: "ข่าวสาร"
+        url: "/currents/"
+        weight: 4
+      - identifier: "contact"
+        name: "ติดต่อ"
+        url: "/contact/"
+        weight: 5
+
+en:
+  label: "English"
+  locale: "en-US"
+  contentDir: content/en
+  weight: 2
+  title: "Thai Netizen Network"
+  copyright: "Content licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) by [Thai Netizen Network](https://netizen.or.th/)"
+  params:
+    description: "A civil society organisation working on digital rights, freedom of expression, privacy, and an open internet in Thailand."
+    accessibility:
+      skip_text: "Skip to content"
+      help_text: "Accessibility statement"
+      help_url: "/en/accessibility/"
+    main_cta:
+      text: "Support us"
+      link: "/en/support/"
+    footer_cta:
+      text: "Support us"
+      link: "/en/support/"
+    github_edit: "Edit this page on GitHub"
+  menu:
+    main:
+      - identifier: "about"
+        name: "About"
+        url: "/en/about/"
+        weight: 1
+      - identifier: "statements"
+        name: "Statements"
+        url: "/en/statements/"
+        weight: 2
+      - identifier: "docs"
+        name: "Documents"
+        url: "/en/docs/"
+        weight: 3
+      - identifier: "currents"
+        name: "News"
+        url: "/en/currents/"
+        weight: 4
+      - identifier: "contact"
+        name: "Contact"
+        url: "/en/contact/"
+        weight: 5

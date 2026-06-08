@@ -1,0 +1,153 @@
+# Sveltia CMS configuration — Thai Netizen Network
+# Docs: https://sveltiacms.app/en/docs
+
+backend:
+  name: github
+  repo: thainetizen/netizen.or.th
+  branch: main
+  # Cloudflare Worker running sveltia-cms-auth (task #12).
+  # Update this URL after the Worker is deployed.
+  base_url: https://sveltia-oauth.netizen.or.th
+  auth_endpoint: auth
+
+# Live preview links in the CMS
+site_url: https://netizen.or.th
+display_url: https://netizen.or.th
+
+# Media: uploads go to static/uploads/, served at /uploads/
+media_folder: static/uploads
+public_folder: /uploads
+
+# Admin UI language (the CMS chrome itself)
+locale: th
+
+# Allow Thai characters in slugs
+slug:
+  encoding: unicode
+  clean_accents: false
+
+# i18n — Hugo layout is content/<locale>/<section>/<slug>.md
+# Sveltia's `multiple_root_folders` matches this exactly.
+i18n:
+  structure: multiple_root_folders
+  locales: [th, en]
+  default_locale: th
+
+collections:
+  # ── Statements ─────────────────────────────────────────────────────────
+  - name: statements
+    label: "แถลงการณ์ / Statements"
+    label_singular: "แถลงการณ์ / Statement"
+    folder: content/statements
+    create: true
+    delete: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "{{locale}}/statements/{{slug}}/"
+    i18n: true
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "หัวเรื่อง / Title", widget: string, i18n: true }
+      - { name: date, label: "วันที่ / Date", widget: datetime, format: "2006-01-02", time_format: false, i18n: duplicate }
+      - { name: translationKey, label: "Translation key (ใส่รหัสเดียวกันทั้งสองภาษา)", widget: string, i18n: duplicate, hint: "Same key on both language versions, e.g. stmt-2026-05-foo" }
+      - { name: tags, label: "แท็ก / Tags", widget: list, default: [], required: false, i18n: duplicate }
+      - { name: draft, label: "ฉบับร่าง / Draft", widget: boolean, default: true, i18n: duplicate }
+      - name: hero
+        label: "รูปภาพประกอบ / Hero image"
+        widget: object
+        required: false
+        i18n: true
+        fields:
+          - { name: src, label: "Image", widget: image, required: false, i18n: duplicate }
+          - { name: alt, label: "คำอธิบายรูป / Alt text (required if image set)", widget: string, required: false, i18n: true }
+      - { name: body, label: "เนื้อหา / Body", widget: markdown, i18n: true }
+
+  # ── Currents (news) ────────────────────────────────────────────────────
+  - name: currents
+    label: "ข่าวสาร / News"
+    label_singular: "ข่าว / News item"
+    folder: content/currents
+    create: true
+    delete: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "{{locale}}/currents/{{slug}}/"
+    i18n: true
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "หัวเรื่อง / Title", widget: string, i18n: true }
+      - { name: date, label: "วันที่ / Date", widget: datetime, format: "2006-01-02", time_format: false, i18n: duplicate }
+      - { name: translationKey, label: "Translation key", widget: string, i18n: duplicate }
+      - { name: tags, label: "แท็ก / Tags", widget: list, default: [], required: false, i18n: duplicate }
+      - { name: draft, label: "ฉบับร่าง / Draft", widget: boolean, default: true, i18n: duplicate }
+      - name: hero
+        label: "รูปภาพประกอบ / Hero image"
+        widget: object
+        required: false
+        i18n: true
+        fields:
+          - { name: src, label: "Image", widget: image, required: false, i18n: duplicate }
+          - { name: alt, label: "คำอธิบายรูป / Alt text", widget: string, required: false, i18n: true }
+      - { name: body, label: "เนื้อหา / Body", widget: markdown, i18n: true }
+
+  # ── Documents / reports ────────────────────────────────────────────────
+  - name: docs
+    label: "เอกสาร / Documents"
+    label_singular: "เอกสาร / Document"
+    folder: content/docs
+    create: true
+    delete: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{slug}}"
+    preview_path: "{{locale}}/docs/{{slug}}/"
+    i18n: true
+    summary: "{{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: "หัวเรื่อง / Title", widget: string, i18n: true }
+      - { name: date, label: "วันที่ / Date", widget: datetime, format: "2006-01-02", time_format: false, i18n: duplicate }
+      - { name: translationKey, label: "Translation key", widget: string, i18n: duplicate }
+      - { name: tags, label: "แท็ก / Tags", widget: list, default: [], required: false, i18n: duplicate }
+      - { name: draft, label: "ฉบับร่าง / Draft", widget: boolean, default: true, i18n: duplicate }
+      - { name: attachment, label: "ไฟล์แนบ / Attachment (PDF)", widget: file, required: false, i18n: true }
+      - { name: body, label: "เนื้อหา / Body", widget: markdown, i18n: true }
+
+  # ── Static pages (known files) ─────────────────────────────────────────
+  - name: pages
+    label: "หน้าหลัก / Pages"
+    label_singular: "หน้า / Page"
+    create: false
+    delete: false
+    i18n: true
+    files:
+      - name: home
+        label: "หน้าแรก / Home"
+        file: content/_index.md
+        i18n: true
+        fields:
+          - { name: title, label: "Title", widget: string, i18n: true }
+          - { name: description, label: "Description", widget: string, i18n: true }
+          - { name: body, label: "Body", widget: markdown, i18n: true }
+      - name: about
+        label: "เกี่ยวกับเรา / About"
+        file: content/about.md
+        i18n: true
+        fields:
+          - { name: title, label: "Title", widget: string, i18n: true }
+          - { name: translationKey, label: "Translation key", widget: hidden, default: about, i18n: duplicate }
+          - { name: description, label: "Description", widget: string, i18n: true }
+          - { name: body, label: "Body", widget: markdown, i18n: true }
+      - name: contact
+        label: "ติดต่อ / Contact"
+        file: content/contact.md
+        i18n: true
+        fields:
+          - { name: title, label: "Title", widget: string, i18n: true }
+          - { name: translationKey, label: "Translation key", widget: hidden, default: contact, i18n: duplicate }
+          - { name: description, label: "Description", widget: string, i18n: true }
+          - { name: body, label: "Body", widget: markdown, i18n: true }

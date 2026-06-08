@@ -1,0 +1,35 @@
+{{/* Language selector — local override of CNCF theme partial.
+     Fixes deprecated .LanguageName → .Label (Hugo 0.158+).
+     Keeps translation-aware linking via .AllTranslations. */}}
+{{ if gt (len .Site.Languages) 1 }}
+<div class="language-selector dropdown">
+    <div class="dropdown-current">
+        <span class="dropdown-arrow">
+            <span class="dropdown-selected">{{ .Site.Language.Label }}</span>
+        </span>
+    </div>
+    <nav class="dropdown-nav" aria-label="{{ i18n "languageSwitcher" | default "Language" }}">
+        <ul class="dropdown-group">
+            {{ $currentLang := .Site.Language.Lang }}
+            {{ range .Site.Languages }}
+                {{ if ne .Lang $currentLang }}
+                    {{ $targetLang := . }}
+                    {{ $targetURL := "" }}
+                    {{ range $.Page.AllTranslations }}
+                        {{ if eq .Lang $targetLang.Lang }}
+                            {{ $targetURL = .Permalink }}
+                        {{ end }}
+                    {{ end }}
+                    <li>
+                        <a href="{{ if $targetURL }}{{ $targetURL }}{{ else }}{{ "/" | absLangURL }}{{ end }}"
+                           lang="{{ $targetLang.Lang }}"
+                           hreflang="{{ $targetLang.Lang }}">
+                            {{ $targetLang.Label }}
+                        </a>
+                    </li>
+                {{ end }}
+            {{ end }}
+        </ul>
+    </nav>
+</div>
+{{ end }}

@@ -1,0 +1,41 @@
+/*
+  # HTTPS / transport security
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Framing — prevent clickjacking
+  X-Frame-Options: SAMEORIGIN
+
+  # Content sniffing
+  X-Content-Type-Options: nosniff
+
+  # Referrer — minimal leakage across origins
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions — deny sensors not needed for a content site
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+
+  # Cross-origin isolation
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-site
+
+  # Content Security Policy
+  # Adjust sha256 hashes if inline scripts are added.
+  # 'unsafe-inline' for style is needed by Pagefind UI; tighten once pinned.
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';
+
+# Fonts — long cache, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fingerprinted CSS/JS (Hugo generates content-hash filenames)
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Pagefind static assets
+/pagefind/*
+  Cache-Control: public, max-age=86400
+
+# CMS admin — never cache, no index
+/admin/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow

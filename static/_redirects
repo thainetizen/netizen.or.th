@@ -1,0 +1,6 @@
+# Cloudflare Pages redirect rules — netizen.or.th
+# Syntax: <source>  <destination>  <status>
+# Stage 2 (thainetizen.org) redirects live in a separate repo/project.
+# Add deep-link redirects here as old content is migrated (Stage 3).
+
+# Placeholder — no redirects yet.

@@ -1,0 +1,5 @@
+######################## production configuration ####################
+baseURL: "https://netizen.or.th/"
+enableRobotsTXT: true
+build:
+  writeStats: true

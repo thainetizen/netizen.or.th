@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content Manager — Thai Netizen Network</title>
+  </head>
+  <body>
+    <!--
+      Sveltia CMS — https://sveltiacms.app
+
+      Web-only workflow (after OAuth Worker is deployed):
+        1. Visit https://netizen.or.th/admin/
+        2. Click "Sign in with GitHub" — OAuth flow via sveltia-oauth.netizen.or.th
+        3. Edit, save → commits land on `main` (or via PR)
+
+      Local-only fallback (works in any Chromium browser, no OAuth):
+        1. `hugo server --configDir=config --buildDrafts`
+        2. Open http://localhost:1313/admin/
+        3. Click "Work with Local Repository", pick the project root.
+
+      OAuth proxy: deploy https://github.com/sveltia/sveltia-cms-auth as a
+      Cloudflare Worker. Set GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET secrets.
+      Update `backend.base_url` in config.yml to the deployed Worker URL.
+    -->
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  </body>
+</html>

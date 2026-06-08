@@ -216,3 +216,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Hugo build artifacts
+public/
+resources/_gen/
+.hugo_build.lock
+hugo_stats.json
+
+# Hugo Module cache (use go.sum for reproducibility instead)
+# vendor/   # uncomment if vendoring modules
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

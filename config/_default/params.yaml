@@ -1,0 +1,24 @@
+######################## custom scripts & styles ####################
+logo_on_white: "/img/logo-b.svg"
+logo_on_black: "/img/logo-w.svg"
+custom_js: []
+custom_css: []
+
+######################## custom config ####################
+images: ["/img/social-share.png"]
+
+github:
+  repo_url: "https://github.com/thainetizen/netizen.or.th/blob/main"
+  show_edit_link: true
+
+social_links:
+  github: "https://github.com/thainetizen"
+  mastodon: ""
+  facebook: ""
+  x: ""
+  rss: "/index.xml"
+
+# Makes the header sticky on tall screens
+sticky_header: true
+# Enable search in header UI
+show_search: true

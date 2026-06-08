@@ -1,0 +1,116 @@
+/* netizen.css — Thai Netizen Network custom overrides
+   Loaded after theme CSS via custom_css param.
+   Goals: WCAG 2.2 AA focus indicators, Thai font stack, reduced-motion. */
+
+/* -------------------------------------------------------------------------
+   TYPOGRAPHY — Thai font stack
+   Noto Sans Thai covers Thai script; system-ui covers Latin and fallback.
+   ------------------------------------------------------------------------- */
+:root {
+  --font-thai: 'Noto Sans Thai', system-ui, -apple-system, sans-serif;
+}
+
+body,
+.content,
+article,
+nav,
+header,
+footer {
+  font-family: var(--font-thai);
+}
+
+/* -------------------------------------------------------------------------
+   FOCUS INDICATORS — WCAG 2.2 SC 2.4.11 (≥3:1 contrast, not hidden)
+   Override browser defaults and any theme resets.
+   ------------------------------------------------------------------------- */
+
+/* Universal visible focus ring */
+:focus-visible {
+  outline: 3px solid #0052cc;   /* ~5:1 on white, ~4.5:1 on light backgrounds */
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remove outline only when not focus-visible (pointer users) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Skip link — must be visible on focus */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: #0052cc;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+}
+.skip-link:focus-visible {
+  top: 0;
+  outline: 3px solid #ffffff;
+  outline-offset: -3px;
+}
+
+/* -------------------------------------------------------------------------
+   KEYBOARD NAVIGATION — nav dropdowns accessible via :focus-within
+   Theme uses CSS hover only; add :focus-within so keyboard users can open.
+   ------------------------------------------------------------------------- */
+.menu-item-has-children:focus-within .sub-menu,
+.menu-item-has-children:hover .sub-menu {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Language selector dropdown — same treatment */
+.language-selector.dropdown:focus-within .dropdown-nav,
+.language-selector.dropdown:hover .dropdown-nav {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Ensure nav links show focus ring */
+.menu-link:focus-visible,
+.dropdown-nav a:focus-visible {
+  outline: 3px solid #0052cc;
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   REDUCED MOTION — respect prefers-reduced-motion
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   MISC A11Y FIXES
+   ------------------------------------------------------------------------- */
+
+/* Ensure sufficient line-height for Thai script legibility */
+:lang(th) {
+  line-height: 1.8;
+  word-break: normal;    /* Thai: no word spaces, browser handles breaks */
+  overflow-wrap: break-word;
+}
+
+/* Ensure external link indicator is not color-only (add icon or text) */
+.external-link::after,
+.child-external-link::after {
+  content: " ↗";
+  font-size: 0.75em;
+  vertical-align: super;
+  speak: never;           /* screen readers skip the arrow */
+}
